@@ -56,3 +56,32 @@ void MainWindow::on_actRu_triggered()   //установить русский я
     ui->actEn->setChecked(false);
     ui->actRu->setChecked(true);
 }
+
+void MainWindow::setOpenMode(bool mode) //обработка режима "Только для чтения"
+{
+    ui->actSave->setEnabled(!mode);
+    ui->actSaveAs->setEnabled(!mode);
+
+}
+
+void MainWindow::on_actHelp_triggered()
+{
+    QFile fileHelp(":/new/res/help.txt");
+    if (fileHelp.open(QFile::ReadOnly))
+    {
+        QTextStream stream(&fileHelp);
+        static int n = 0;   //чтобы не создавать лишние объекты QTextEdit ("справка")
+        if(n)
+        {
+            delete help;    //удалить прошлое окно справки
+        }
+        help = new QTextEdit;
+        n = 1;
+
+        help->setWindowTitle(tr("Справка"));
+        help->setReadOnly(true);
+        help->insertPlainText(stream.readAll());
+        help->resize(400, 400);
+        help->show();
+    }
+}

@@ -49,12 +49,18 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+signals:
+    void setReadOnlyMode(bool); //сигнал с значением флага "Только для чтения"
+
 private slots:
+    void setOpenMode(bool mode);    //активация режима "Только для чтения"
+
     void on_actWhite_triggered();
 
     void on_actDark_triggered();
     void on_actEn_triggered();
     void on_actRu_triggered();
+    void on_actHelp_triggered();
 };
 
 #endif // MAINWINDOW_H
