@@ -53,6 +53,8 @@ private slots:
     void on_actWhite_triggered();
 
     void on_actDark_triggered();
+    void on_actEn_triggered();
+    void on_actRu_triggered();
 };
 
 #endif // MAINWINDOW_H

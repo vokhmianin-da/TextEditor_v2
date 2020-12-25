@@ -39,3 +39,20 @@ void MainWindow::on_actDark_triggered()     //выбор темной темы
         ui->actDark->setChecked(true);
     }
 }
+
+void MainWindow::on_actEn_triggered()   //установить английский язык
+{
+    translator.load(":/new/translations/QtLanguage_en.qm");
+    qApp->installTranslator(&translator);
+    ui->retranslateUi(this);
+    ui->actEn->setChecked(true);
+    ui->actRu->setChecked(false);
+}
+
+void MainWindow::on_actRu_triggered()   //установить русский язык
+{
+    qApp->removeTranslator(&translator);
+    ui->retranslateUi(this);
+    ui->actEn->setChecked(false);
+    ui->actRu->setChecked(true);
+}
