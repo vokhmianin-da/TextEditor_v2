@@ -65,6 +65,7 @@ private slots:
     void on_actRu_triggered();
     void on_actHelp_triggered();
     void on_actCreate_triggered();
+    void on_actOpen_triggered();
 };
 
 #endif // MAINWINDOW_H
