@@ -4,12 +4,14 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QLocale>
+#include <QList>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    filter = trUtf8("Текстовый файл(*.txt)");
 }
 
 MainWindow::~MainWindow()
@@ -64,7 +66,7 @@ void MainWindow::setOpenMode(bool mode) //обработка режима "То�
 
 }
 
-void MainWindow::on_actHelp_triggered()
+void MainWindow::on_actHelp_triggered() //вызов справки
 {
     QFile fileHelp(":/new/res/help.txt");
     if (fileHelp.open(QFile::ReadOnly))
@@ -83,5 +85,45 @@ void MainWindow::on_actHelp_triggered()
         help->insertPlainText(stream.readAll());
         help->resize(400, 400);
         help->show();
+    }
+}
+
+void MainWindow::on_actCreate_triggered()   //создание документа
+{
+    documentTextEdit* pDocument = new documentTextEdit; //создание нового текстового окна
+    pDocument->setName(QFileDialog::getSaveFileName(this, tr("Создать документ"), QDir::current().path(), filter));
+
+    QMainWindow* tempWindow = new QMainWindow;
+    tempWindow->setCentralWidget(pDocument);
+    tempWindow->setWindowTitle(pDocument->getName());   //установка имени вкладки
+
+    QList <QMdiSubWindow*>tempList = ui->documentViewer->subWindowList();   //проверяем, открыт ли уже такой файл
+    for(int i = 0; i < tempList.size(); i++)
+    {
+       if(tempList[i]->widget()->windowTitle() == tempWindow->windowTitle())
+       {
+           //Эта конструкция очищает окно, если такое уже было открыто (удивительно, но конструкция работает!!!)
+           QMainWindow* ptr = static_cast<QMainWindow*>(tempList[i]->widget());
+           documentTextEdit* ptr2 = static_cast<documentTextEdit*>(ptr->centralWidget());
+           ptr2->clear();
+           return;
+       }
+    }
+
+    if (pDocument->getName().length() > 0)
+    {
+        QString ext = QString(&(pDocument->getName().data()[pDocument->getName().length() - 4]));
+        if (ext == ".txt")
+        {
+            QFile file(pDocument->getName());
+            if (file.open(QFile::WriteOnly))
+            {
+                QTextStream stream(&file);
+                stream.setCodec("UTF-8");    //ДЛЯ ОТОБРАЖЕНИЯ РУССКИХ БУКВ
+                ui->documentViewer->addSubWindow(tempWindow);    //добавление нового текстового окна в QMdiArea
+                stream << pDocument->toPlainText();
+                file.close();
+            }
+        }
     }
 }

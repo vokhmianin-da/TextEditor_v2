@@ -5,6 +5,8 @@
 #include <QtWidgets>
 #include <QTranslator>
 #include <QEvent>
+#include "documenttextedit.h"
+//#include <QMap>
 
 namespace Ui {
 class MainWindow;
@@ -19,7 +21,8 @@ private:
     QString filter;  //фильтр форматов файлов
     QTextEdit* help; //для создания окна справки
     QTranslator translator; //для переключения переводов
-    QString currentFileName = 0;    //хранит текущее имя файла
+    //QMap <QString,documentTextEdit> fileDocuments;   //map для хранения текущих документов
+
     QString application = 0;    //хранит текущее имя файла
 
     /*Для хранения текущих горячих клавиш*/
@@ -61,6 +64,7 @@ private slots:
     void on_actEn_triggered();
     void on_actRu_triggered();
     void on_actHelp_triggered();
+    void on_actCreate_triggered();
 };
 
 #endif // MAINWINDOW_H

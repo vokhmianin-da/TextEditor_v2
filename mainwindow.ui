@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QMdiArea" name="mdiArea">
+     <widget class="QMdiArea" name="documentViewer">
       <property name="viewMode">
        <enum>QMdiArea::TabbedView</enum>
       </property>

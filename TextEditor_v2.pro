@@ -13,9 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    documenttextedit.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    documenttextedit.h
 
 FORMS    += mainwindow.ui
 
