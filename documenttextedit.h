@@ -14,6 +14,7 @@ public:
 
     void setName(QString str);  //установить имя документа
     QString getName();  //получить имя документа
+    bool readOnlyMode = false;  //состояние флага "Только для чтения" для данного документа
 };
 
 #endif // DOCUMENTTEXTEDIT_H

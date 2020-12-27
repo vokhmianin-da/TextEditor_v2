@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     filter = trUtf8("Текстовый файл(*.txt)");
-    connect(this, SIGNAL(setReadOnlyMode(bool)), this, SLOT(setOpenMode(bool)));
 }
 
 MainWindow::~MainWindow()
@@ -58,14 +57,6 @@ void MainWindow::on_actRu_triggered()   //установить русский я
     ui->retranslateUi(this);
     ui->actEn->setChecked(false);
     ui->actRu->setChecked(true);
-}
-
-void MainWindow::setOpenMode(bool mode) //обработка режима "Только для чтения"
-{
-    /*ui->actSave->setEnabled(!mode);
-    ui->actSaveAs->setEnabled(!mode);
-    */
-
 }
 
 void MainWindow::on_actHelp_triggered() //вызов справки
@@ -133,6 +124,14 @@ void MainWindow::on_actCreate_triggered()   //создание документ�
 void MainWindow::on_actOpen_triggered() //открыть документ
 {
     documentTextEdit* pDocument = new documentTextEdit; //создание нового текстового окна
+    if(ui->actReadOnly->isChecked())
+    {
+        pDocument->readOnlyMode = true; //только для чтения
+    }
+    else
+    {
+        pDocument->readOnlyMode = false;
+    }
     pDocument->setName(QFileDialog::getOpenFileName(this, tr("Открыть документ"), QDir::current().path(), filter));
     QMainWindow* tempWindow = new QMainWindow;
     tempWindow->setCentralWidget(pDocument);
@@ -167,8 +166,27 @@ void MainWindow::on_actOpen_triggered() //открыть документ
                 ui->documentViewer->addSubWindow(tempWindow);    //добавление нового текстового окна в QMdiArea
                 pDocument->setPlainText(stream.readAll());
                 file.close();
-                emit setReadOnlyMode(ui->actReadOnly->isChecked());  //сигнал о режиме открытия файла
+
             }
         }
+    }
+}
+
+void MainWindow::on_documentViewer_subWindowActivated(QMdiSubWindow *arg1)
+{
+    if(!arg1) return;   //если нет подокон, то сразу выходим
+
+    //Обработка флага "Только для чтения"
+    if(static_cast<documentTextEdit*>(static_cast<QMainWindow*>(arg1->widget())->centralWidget())->readOnlyMode)
+    {
+        static_cast<documentTextEdit*>(static_cast<QMainWindow*>(arg1->widget())->centralWidget())->setReadOnly(true);
+        ui->actSave->setEnabled(false);
+        ui->actSaveAs->setEnabled(false);
+    }
+    else
+    {
+        static_cast<documentTextEdit*>(static_cast<QMainWindow*>(arg1->widget())->centralWidget())->setReadOnly(false);
+        ui->actSave->setEnabled(true);
+        ui->actSaveAs->setEnabled(true);
     }
 }

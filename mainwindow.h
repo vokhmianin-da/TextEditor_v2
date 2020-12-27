@@ -56,8 +56,6 @@ signals:
     void setReadOnlyMode(bool); //сигнал с значением флага "Только для чтения"
 
 private slots:
-    void setOpenMode(bool mode);    //активация режима "Только для чтения"
-
     void on_actWhite_triggered();
 
     void on_actDark_triggered();
@@ -66,6 +64,7 @@ private slots:
     void on_actHelp_triggered();
     void on_actCreate_triggered();
     void on_actOpen_triggered();
+    void on_documentViewer_subWindowActivated(QMdiSubWindow *arg1);
 };
 
 #endif // MAINWINDOW_H
