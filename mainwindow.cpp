@@ -172,7 +172,7 @@ void MainWindow::on_actOpen_triggered() //открыть документ
     }
 }
 
-void MainWindow::on_documentViewer_subWindowActivated(QMdiSubWindow *arg1)
+void MainWindow::on_documentViewer_subWindowActivated(QMdiSubWindow *arg1)  //обработка подокна при активации
 {
     if(!arg1) return;   //если нет подокон, то сразу выходим
 
@@ -188,5 +188,46 @@ void MainWindow::on_documentViewer_subWindowActivated(QMdiSubWindow *arg1)
         static_cast<documentTextEdit*>(static_cast<QMainWindow*>(arg1->widget())->centralWidget())->setReadOnly(false);
         ui->actSave->setEnabled(true);
         ui->actSaveAs->setEnabled(true);
+    }
+}
+
+void MainWindow::on_actSaveAs_triggered()   //сохранить как
+{
+    QString currentFileName;
+    currentFileName = QFileDialog::getSaveFileName(this, tr("Сохранить как"), static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->getName(), filter);
+    if (currentFileName.length() > 0)
+    {
+        QString ext = QString(&(currentFileName.data()[currentFileName.length() - 4]));
+        if (ext == ".txt")
+        {
+            QFile file(currentFileName);
+            if (file.open(QFile::WriteOnly))
+            {
+                QTextStream stream(&file);
+                stream.setCodec("UTF-8");    //ДЛЯ ОТОБРАЖЕНИЯ РУССКИХ БУКВ
+                stream << static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->toPlainText();
+                file.close();
+            }
+        }
+    }
+}
+
+void MainWindow::on_actSave_triggered() //сохранить
+{
+    QString currentFileName = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->getName();
+    if (currentFileName.length() > 0)
+    {
+        QString ext = QString(&(currentFileName.data()[currentFileName.length() - 4]));
+        if (ext == ".txt")
+        {
+            QFile file(currentFileName);
+            if (file.open(QFile::WriteOnly))
+            {
+                QTextStream stream(&file);
+                stream.setCodec("UTF-8");    //ДЛЯ ОТОБРАЖЕНИЯ РУССКИХ БУКВ
+                stream << static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->toPlainText();
+                file.close();
+            }
+        }
     }
 }
