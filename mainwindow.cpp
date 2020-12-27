@@ -193,6 +193,10 @@ void MainWindow::on_documentViewer_subWindowActivated(QMdiSubWindow *arg1)  //о
 
 void MainWindow::on_actSaveAs_triggered()   //сохранить как
 {
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
     QString currentFileName;
     currentFileName = QFileDialog::getSaveFileName(this, tr("Сохранить как"), static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->getName(), filter);
     if (currentFileName.length() > 0)
@@ -214,6 +218,10 @@ void MainWindow::on_actSaveAs_triggered()   //сохранить как
 
 void MainWindow::on_actSave_triggered() //сохранить
 {
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
     QString currentFileName = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->getName();
     if (currentFileName.length() > 0)
     {
@@ -230,4 +238,9 @@ void MainWindow::on_actSave_triggered() //сохранить
             }
         }
     }
+}
+
+void MainWindow::on_actExit_triggered() //выход
+{
+    qApp->exit();
 }

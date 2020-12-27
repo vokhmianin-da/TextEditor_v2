@@ -67,6 +67,7 @@ private slots:
     void on_documentViewer_subWindowActivated(QMdiSubWindow *arg1);
     void on_actSaveAs_triggered();
     void on_actSave_triggered();
+    void on_actExit_triggered();
 };
 
 #endif // MAINWINDOW_H
