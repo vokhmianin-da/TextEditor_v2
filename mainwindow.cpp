@@ -5,13 +5,18 @@
 #include <QTextStream>
 #include <QLocale>
 #include <QList>
+#include <QPrinter>
+#include <QPrintDialog>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //QKeySequence x = ui->actOpen->shortcut();
     filter = trUtf8("Текстовый файл(*.txt)");
+    installEventFilter(new KeyFilter);
 }
 
 MainWindow::~MainWindow()
@@ -243,4 +248,21 @@ void MainWindow::on_actSave_triggered() //сохранить
 void MainWindow::on_actExit_triggered() //выход
 {
     qApp->exit();
+}
+
+
+void MainWindow::on_actPrint_triggered()    //печать
+{
+    QPrinter printer;
+    QPrintDialog dlg(&printer, this);
+
+    dlg.setWindowTitle("Печать");
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
+    if(dlg.exec() == QDialog::Accepted)
+    {
+        static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->print(&printer);
+    }
 }

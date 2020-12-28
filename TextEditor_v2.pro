@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui printsupport
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,11 +14,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
+    keyfilter.cpp \
         mainwindow.cpp \
     documenttextedit.cpp
 
 HEADERS  += mainwindow.h \
-    documenttextedit.h
+    documenttextedit.h \
+    keyfilter.h
 
 FORMS    += mainwindow.ui
 

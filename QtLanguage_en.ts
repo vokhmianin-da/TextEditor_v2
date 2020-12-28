@@ -30,12 +30,12 @@
         <translation>File</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="52"/>
+        <location filename="mainwindow.ui" line="53"/>
         <source>Режим</source>
         <translation>Mode</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="58"/>
+        <location filename="mainwindow.ui" line="59"/>
         <source>Назначить клавиши</source>
         <translation>Assign keys</translation>
     </message>
@@ -71,12 +71,13 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="127"/>
-        <location filename="mainwindow.ui" line="172"/>
+        <location filename="mainwindow.cpp" line="206"/>
         <source>Сохранить как</source>
         <translation>Save as</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="132"/>
+        <location filename="mainwindow.cpp" line="81"/>
         <source>Справка</source>
         <translation>Help</translation>
     </message>
@@ -86,25 +87,30 @@
         <translation>Only read</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="180"/>
-        <location filename="mainwindow.ui" line="223"/>
+        <location filename="mainwindow.ui" line="172"/>
+        <location filename="mainwindow.ui" line="215"/>
         <source>Выход</source>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="191"/>
+        <location filename="mainwindow.ui" line="183"/>
         <source>Русский</source>
         <translation>Russian</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="199"/>
+        <location filename="mainwindow.ui" line="191"/>
         <source>Английский</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="226"/>
+        <location filename="mainwindow.ui" line="218"/>
         <source>Ctrl+Q</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="223"/>
+        <source>Печать</source>
+        <translation>Print</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="103"/>
@@ -137,22 +143,29 @@
         <translation type="vanished">Assign key &quot;Quit&quot;</translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="18"/>
         <source>Текстовый файл(*.txt)</source>
-        <translation type="vanished">Text file(*.txt)</translation>
+        <translation>Text file(*.txt)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="210"/>
+        <location filename="mainwindow.cpp" line="140"/>
+        <source>Открыть документ</source>
+        <translation>Open document</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="202"/>
         <source>Светлая</source>
         <translation>Light</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="218"/>
+        <location filename="mainwindow.ui" line="210"/>
         <source>Темная</source>
         <translation>Dark</translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="92"/>
         <source>Создать документ</source>
-        <translation type="vanished">Create document</translation>
+        <translation>Create document</translation>
     </message>
 </context>
 </TS>
