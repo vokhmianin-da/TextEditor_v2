@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <QEvent>
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+class MainWindow;
 
 class KeyFilter : public QObject
 {
@@ -11,6 +15,7 @@ protected:
 
 public:
     explicit KeyFilter(QObject *parent = nullptr);
+    bool checkKeys(unsigned int typeModifier, int key, MainWindow* ptr);
 
 };
 

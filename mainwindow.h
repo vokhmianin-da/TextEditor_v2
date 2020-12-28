@@ -24,6 +24,11 @@ private:
     QTextEdit* help; //для создания окна справки
     QTranslator translator; //для переключения переводов
 
+    QKeySequence createButton = Qt::ControlModifier + Qt::Key_N;
+    QKeySequence openButton = Qt::ControlModifier + Qt::Key_O;
+    QKeySequence saveButton = Qt::ControlModifier + Qt::Key_S;
+    QKeySequence quitButton = Qt::ControlModifier + Qt::Key_Q;
+
     QString application = 0;    //хранит текущее имя файла
 
 public:
