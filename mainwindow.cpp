@@ -9,6 +9,7 @@
 #include <QPrintDialog>
 
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -17,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //QKeySequence x = ui->actOpen->shortcut();
     filter = trUtf8("Текстовый файл(*.txt)");
     installEventFilter(new KeyFilter);
+    ptrStatusBar = statusBar();
 }
 
 MainWindow::~MainWindow()
@@ -264,5 +266,45 @@ void MainWindow::on_actPrint_triggered()    //печать
     if(dlg.exec() == QDialog::Accepted)
     {
         static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->print(&printer);
+    }
+}
+
+void MainWindow::on_actCreateAssign_triggered(bool checked)
+{
+    if(checked)
+    {
+        ui->actExitAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+        ui->actSaveAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+        ui->actOpenAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+    }
+}
+
+void MainWindow::on_actOpenAssign_triggered(bool checked)
+{
+    if(checked)
+    {
+        ui->actExitAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+        ui->actSaveAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+        ui->actCreateAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+    }
+}
+
+void MainWindow::on_actSaveAssign_triggered(bool checked)
+{
+    if(checked)
+    {
+        ui->actExitAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+        ui->actCreateAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+        ui->actOpenAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+    }
+}
+
+void MainWindow::on_actExitAssign_triggered(bool checked)
+{
+    if(checked)
+    {
+        ui->actCreateAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+        ui->actSaveAssign->setChecked(!checked);    //сброс галочки назначения клавиши
+        ui->actOpenAssign->setChecked(!checked);    //сброс галочки назначения клавиши
     }
 }

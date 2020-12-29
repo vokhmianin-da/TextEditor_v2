@@ -17,6 +17,11 @@ public:
     explicit KeyFilter(QObject *parent = nullptr);
     bool checkKeys(unsigned int typeModifier, int key, MainWindow* ptr);
 
+    bool shortcutCreate(MainWindow* ptr, QKeyEvent *ptrEvent);
+    bool shortcutOpen(MainWindow* ptr, QKeyEvent *ptrEvent);
+    bool shortcutSave(MainWindow* ptr, QKeyEvent *ptrEvent);
+    bool shortcutExit(MainWindow* ptr, QKeyEvent *ptrEvent);
+
 };
 
 #endif // KEYFILTER_H

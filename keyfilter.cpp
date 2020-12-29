@@ -17,60 +17,20 @@ bool KeyFilter::eventFilter(QObject *obj, QEvent *event)
         {
             return false;
         }
-        else if(ptrObj->ui->actCreateAssign->isChecked())    //если назначаем "Создать"
+        else    //если назначаем
         {
-            if(checkKeys(ptrEvent->modifiers(), ptrEvent->key(), ptrObj))
+            if(ptrObj->ui->actCreateAssign->isChecked())
             {
-                ptrObj->createButton = ptrEvent->modifiers() + ptrEvent->key();
-                ptrObj->ui->actCreateAssign->setChecked(false);    //сброс галочки назначения клавиши
-                ptrObj->ui->actCreate->setShortcut(ptrObj->createButton);   //назначение новой комбинации
-                return true;
-            }
-            else
+                return shortcutCreate(ptrObj, ptrEvent);
+            } else if (ptrObj->ui->actOpenAssign->isChecked())
             {
-                return true;
-            }
-        }
-        else if(ptrObj->ui->actOpenAssign->isChecked())    //если назначаем "Открыть"
-        {
-            if(checkKeys(ptrEvent->modifiers(), ptrEvent->key(), ptrObj))
+               return  shortcutOpen(ptrObj, ptrEvent);
+            } else if (ptrObj->ui->actSaveAssign->isChecked())
             {
-                ptrObj->openButton = ptrEvent->modifiers() + ptrEvent->key();
-                ptrObj->ui->actOpenAssign->setChecked(false);    //сброс галочки назначения клавиши
-                ptrObj->ui->actOpen->setShortcut(ptrObj->openButton);   //назначение новой комбинации
-                return true;
-            }
-            else
+               return  shortcutSave(ptrObj, ptrEvent);
+            } else if (ptrObj->ui->actExitAssign->isChecked())
             {
-                return true;
-            }
-        }
-        else if(ptrObj->ui->actSaveAssign->isChecked())    //если назначаем "Сохранить"
-        {
-            if(checkKeys(ptrEvent->modifiers(), ptrEvent->key(), ptrObj))
-            {
-                ptrObj->saveButton = ptrEvent->modifiers() + ptrEvent->key();
-                ptrObj->ui->actSaveAssign->setChecked(false);    //сброс галочки назначения клавиши
-                ptrObj->ui->actSave->setShortcut(ptrObj->saveButton);   //назначение новой комбинации
-                return true;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        else if(ptrObj->ui->actExitAssign->isChecked())    //если назначаем "Выход"
-        {
-            if(checkKeys(ptrEvent->modifiers(), ptrEvent->key(), ptrObj))
-            {
-                ptrObj->quitButton = ptrEvent->modifiers() + ptrEvent->key();
-                ptrObj->ui->actExitAssign->setChecked(false);    //сброс галочки назначения клавиши
-                ptrObj->ui->actExit->setShortcut(ptrObj->quitButton);   //назначение новой комбинации
-                return true;
-            }
-            else
-            {
-                return true;
+                return shortcutExit(ptrObj, ptrEvent);
             }
         }
 
@@ -90,5 +50,61 @@ bool KeyFilter::checkKeys(unsigned int typeModifier, int key, MainWindow* ptr)
     {
         return false;
     }
+    return true;
+}
+
+bool KeyFilter::shortcutCreate(MainWindow *ptr, QKeyEvent *ptrEvent)    //назначаем "Создать"
+{
+    if(checkKeys(ptrEvent->modifiers(), ptrEvent->key(), ptr))
+    {
+        ptr->createButton = ptrEvent->modifiers() + ptrEvent->key();
+        ptr->ui->actCreateAssign->setChecked(false);    //сброс галочки назначения клавиши
+        ptr->ui->actCreate->setShortcut(ptr->createButton);   //назначение новой комбинации
+        ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Создать\" изменена");
+        return true;
+    }
+    ptr->ptrStatusBar->showMessage("Изменение не удалось");
+    return true;
+}
+
+bool KeyFilter::shortcutOpen(MainWindow *ptr, QKeyEvent *ptrEvent)  //назначаем "Открыть"
+{
+    if(checkKeys(ptrEvent->modifiers(), ptrEvent->key(), ptr))
+    {
+        ptr->openButton = ptrEvent->modifiers() + ptrEvent->key();
+        ptr->ui->actOpenAssign->setChecked(false);    //сброс галочки назначения клавиши
+        ptr->ui->actOpen->setShortcut(ptr->openButton);   //назначение новой комбинации
+        ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Открыть\" изменена");
+        return true;
+    }
+    ptr->ptrStatusBar->showMessage("Изменение не удалось");
+    return true;
+}
+
+bool KeyFilter::shortcutSave(MainWindow *ptr, QKeyEvent *ptrEvent)  //назначаем "Сохранить"
+{
+    if(checkKeys(ptrEvent->modifiers(), ptrEvent->key(), ptr))
+    {
+        ptr->saveButton = ptrEvent->modifiers() + ptrEvent->key();
+        ptr->ui->actSaveAssign->setChecked(false);    //сброс галочки назначения клавиши
+        ptr->ui->actSave->setShortcut(ptr->saveButton);   //назначение новой комбинации
+        ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Сохранить\" изменена");
+        return true;
+    }
+    ptr->ptrStatusBar->showMessage("Изменение не удалось");
+    return true;
+}
+
+bool KeyFilter::shortcutExit(MainWindow *ptr, QKeyEvent *ptrEvent)  //назначаем "Выход"
+{
+    if(checkKeys(ptrEvent->modifiers(), ptrEvent->key(), ptr))
+    {
+        ptr->quitButton = ptrEvent->modifiers() + ptrEvent->key();
+        ptr->ui->actExitAssign->setChecked(false);    //сброс галочки назначения клавиши
+        ptr->ui->actExit->setShortcut(ptr->quitButton);   //назначение новой комбинации
+        ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Выход\" изменена");
+        return true;
+    }
+    ptr->ptrStatusBar->showMessage("Изменение не удалось");
     return true;
 }

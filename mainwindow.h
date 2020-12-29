@@ -7,6 +7,7 @@
 #include <QEvent>
 #include "documenttextedit.h"
 #include "keyfilter.h"
+#include <QStatusBar>
 //#include <QMap>
 
 namespace Ui {
@@ -23,6 +24,7 @@ private:
     QString filter;  //фильтр форматов файлов
     QTextEdit* help; //для создания окна справки
     QTranslator translator; //для переключения переводов
+    QStatusBar *ptrStatusBar;
 
     QKeySequence createButton = Qt::ControlModifier + Qt::Key_N;
     QKeySequence openButton = Qt::ControlModifier + Qt::Key_O;
@@ -49,6 +51,10 @@ private slots:
     void on_actSave_triggered();
     void on_actExit_triggered();
     void on_actPrint_triggered();
+    void on_actCreateAssign_triggered(bool checked);
+    void on_actOpenAssign_triggered(bool checked);
+    void on_actSaveAssign_triggered(bool checked);
+    void on_actExitAssign_triggered(bool checked);
 };
 
 #endif // MAINWINDOW_H
