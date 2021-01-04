@@ -58,6 +58,7 @@ private slots:
     void on_actLeft_triggered();
     void on_actCenter_triggered();
     void on_actRight_triggered();
+    void on_actFont_triggered();
 };
 
 #endif // MAINWINDOW_H

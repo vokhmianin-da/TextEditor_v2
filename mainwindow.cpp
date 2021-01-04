@@ -173,7 +173,7 @@ void MainWindow::on_actOpen_triggered() //открыть документ
                 stream.setCodec("UTF-8");    //ДЛЯ ОТОБРАЖЕНИЯ РУССКИХ БУКВ
                 //ui->plainTextEdit->setPlainText(stream.readAll());
                 ui->documentViewer->addSubWindow(tempWindow);    //добавление нового текстового окна в QMdiArea
-                pDocument->setPlainText(stream.readAll());
+                pDocument->setHtml(stream.readAll());
                 file.close();
 
             }
@@ -206,8 +206,9 @@ void MainWindow::on_actSaveAs_triggered()   //сохранить как
     {
         return;
     }
+    documentTextEdit* documentPtr = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget());
     QString currentFileName;
-    currentFileName = QFileDialog::getSaveFileName(this, tr("Сохранить как"), static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->getName(), filter);
+    currentFileName = QFileDialog::getSaveFileName(this, tr("Сохранить как"), documentPtr->getName(), filter);
     if (currentFileName.length() > 0)
     {
         QString ext = QString(&(currentFileName.data()[currentFileName.length() - 4]));
@@ -218,7 +219,8 @@ void MainWindow::on_actSaveAs_triggered()   //сохранить как
             {
                 QTextStream stream(&file);
                 stream.setCodec("UTF-8");    //ДЛЯ ОТОБРАЖЕНИЯ РУССКИХ БУКВ
-                stream << static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->toPlainText();
+                ext = documentPtr->toHtml();
+                stream << ext;
                 file.close();
             }
         }
@@ -231,7 +233,8 @@ void MainWindow::on_actSave_triggered() //сохранить
     {
         return;
     }
-    QString currentFileName = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->getName();
+    documentTextEdit* documentPtr = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget());
+    QString currentFileName = documentPtr->getName();
     if (currentFileName.length() > 0)
     {
         QString ext = QString(&(currentFileName.data()[currentFileName.length() - 4]));
@@ -242,7 +245,8 @@ void MainWindow::on_actSave_triggered() //сохранить
             {
                 QTextStream stream(&file);
                 stream.setCodec("UTF-8");    //ДЛЯ ОТОБРАЖЕНИЯ РУССКИХ БУКВ
-                stream << static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->toPlainText();
+                ext = documentPtr->toHtml();
+                stream << ext;
                 file.close();
             }
         }
@@ -339,4 +343,17 @@ void MainWindow::on_actRight_triggered()    //выравнивание по пр
     }
     static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->setAlignment(Qt::AlignRight);
 
+}
+
+void MainWindow::on_actFont_triggered() //установка шрифта
+{
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
+    documentTextEdit* documentPtr = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget());
+    QFontDialog dlg(documentPtr->currentFont,this);
+    bool b[] = {true};
+    documentPtr->currentFont = dlg.getFont(b, documentPtr->currentFont);
+    documentPtr->setCurrentFont(documentPtr->currentFont);
 }
