@@ -84,10 +84,34 @@
     <addaction name="menuLanguage"/>
     <addaction name="menuApplication"/>
    </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Текст</string>
+    </property>
+    <widget class="QMenu" name="menu_2">
+     <property name="title">
+      <string>Выравнивание</string>
+     </property>
+     <addaction name="actLeft"/>
+     <addaction name="actCenter"/>
+     <addaction name="actRight"/>
+    </widget>
+    <widget class="QMenu" name="menu_3">
+     <property name="title">
+      <string>Шрифт</string>
+     </property>
+     <addaction name="actFont"/>
+     <addaction name="actCopyFont"/>
+     <addaction name="actPasteFont"/>
+    </widget>
+    <addaction name="menu_2"/>
+    <addaction name="menu_3"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMode"/>
    <addaction name="menuAssignButton"/>
    <addaction name="menuDecoration"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -221,6 +245,36 @@
   <action name="actPrint">
    <property name="text">
     <string>Печать</string>
+   </property>
+  </action>
+  <action name="actLeft">
+   <property name="text">
+    <string>По левому краю</string>
+   </property>
+  </action>
+  <action name="actCenter">
+   <property name="text">
+    <string>По центру</string>
+   </property>
+  </action>
+  <action name="actRight">
+   <property name="text">
+    <string>По правому краю</string>
+   </property>
+  </action>
+  <action name="actFont">
+   <property name="text">
+    <string>Выбрать шрифт</string>
+   </property>
+  </action>
+  <action name="actCopyFont">
+   <property name="text">
+    <string>Копировать шрифт</string>
+   </property>
+  </action>
+  <action name="actPasteFont">
+   <property name="text">
+    <string>Вставить шрифт</string>
    </property>
   </action>
  </widget>

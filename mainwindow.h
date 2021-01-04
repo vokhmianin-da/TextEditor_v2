@@ -55,6 +55,9 @@ private slots:
     void on_actOpenAssign_triggered(bool checked);
     void on_actSaveAssign_triggered(bool checked);
     void on_actExitAssign_triggered(bool checked);
+    void on_actLeft_triggered();
+    void on_actCenter_triggered();
+    void on_actRight_triggered();
 };
 
 #endif // MAINWINDOW_H

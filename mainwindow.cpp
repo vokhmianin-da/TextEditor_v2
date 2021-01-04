@@ -7,6 +7,8 @@
 #include <QList>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QFont>
+#include <QFontDialog>
 
 
 
@@ -307,4 +309,34 @@ void MainWindow::on_actExitAssign_triggered(bool checked)
         ui->actSaveAssign->setChecked(!checked);    //сброс галочки назначения клавиши
         ui->actOpenAssign->setChecked(!checked);    //сброс галочки назначения клавиши
     }
+}
+
+void MainWindow::on_actLeft_triggered() //выравнивание по левому краю
+{
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
+    static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->setAlignment(Qt::AlignLeft);
+
+}
+
+void MainWindow::on_actCenter_triggered()   //выравнивание по центру
+{
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
+    static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->setAlignment(Qt::AlignCenter);
+
+}
+
+void MainWindow::on_actRight_triggered()    //выравнивание по правому краю
+{
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
+    static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget())->setAlignment(Qt::AlignRight);
+
 }

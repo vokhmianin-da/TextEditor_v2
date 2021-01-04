@@ -1,9 +1,9 @@
 #ifndef DOCUMENTTEXTEDIT_H
 #define DOCUMENTTEXTEDIT_H
-#include <QPlainTextEdit>
+#include <QTextEdit>
 #include <QString>
 
-class documentTextEdit : public QPlainTextEdit
+class documentTextEdit : public QTextEdit
 {
     Q_OBJECT
 private:
