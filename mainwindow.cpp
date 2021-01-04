@@ -357,3 +357,26 @@ void MainWindow::on_actFont_triggered() //установка шрифта
     documentPtr->currentFont = dlg.getFont(b, documentPtr->currentFont);
     documentPtr->setCurrentFont(documentPtr->currentFont);
 }
+
+void MainWindow::on_actCopyFont_triggered() //копировать шрифт
+{
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
+    documentTextEdit* documentPtr = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget());
+
+    documentPtr->tempFont = documentPtr->textCursor().charFormat().font();
+}
+
+void MainWindow::on_actPasteFont_triggered() //вставить шрифт
+{
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
+    documentTextEdit* documentPtr = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget());
+    QTextCharFormat fmt = documentPtr->textCursor().charFormat();
+    fmt.setFont(documentPtr->tempFont);
+    documentPtr->textCursor().setCharFormat(fmt);
+}
