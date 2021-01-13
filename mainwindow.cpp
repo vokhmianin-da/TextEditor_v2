@@ -9,6 +9,8 @@
 #include <QPrintDialog>
 #include <QFont>
 #include <QFontDialog>
+#include <QDate>
+#include <QTime>
 
 
 
@@ -379,4 +381,28 @@ void MainWindow::on_actPasteFont_triggered() //вставить шрифт
     QTextCharFormat fmt = documentPtr->textCursor().charFormat();
     fmt.setFont(documentPtr->tempFont);
     documentPtr->textCursor().setCharFormat(fmt);
+}
+
+void MainWindow::on_actCurrentDate_triggered()  //вставка текущей даты
+{
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
+    documentTextEdit* documentPtr = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget());
+    QDate date = QDate::currentDate();
+
+    documentPtr->textCursor().insertText(date.toString("dd.MM.yyyy"));
+}
+
+void MainWindow::on_actCurrentTime_triggered()  //вставка текущего времени
+{
+    if(!ui->documentViewer->currentSubWindow())
+    {
+        return;
+    }
+    documentTextEdit* documentPtr = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->centralWidget());
+    QTime time = QTime::currentTime();
+
+    documentPtr->textCursor().insertText(time.toString("h:m:s"));
 }

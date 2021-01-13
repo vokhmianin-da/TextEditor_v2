@@ -61,6 +61,8 @@ private slots:
     void on_actFont_triggered();
     void on_actCopyFont_triggered();
     void on_actPasteFont_triggered();
+    void on_actCurrentDate_triggered();
+    void on_actCurrentTime_triggered();
 };
 
 #endif // MAINWINDOW_H

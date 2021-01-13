@@ -107,11 +107,19 @@
     <addaction name="menu_2"/>
     <addaction name="menu_3"/>
    </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>Вставка</string>
+    </property>
+    <addaction name="actCurrentTime"/>
+    <addaction name="actCurrentDate"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMode"/>
    <addaction name="menuAssignButton"/>
    <addaction name="menuDecoration"/>
    <addaction name="menu"/>
+   <addaction name="menu_4"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -275,6 +283,16 @@
   <action name="actPasteFont">
    <property name="text">
     <string>Вставить шрифт</string>
+   </property>
+  </action>
+  <action name="actCurrentTime">
+   <property name="text">
+    <string>Текущее время</string>
+   </property>
+  </action>
+  <action name="actCurrentDate">
+   <property name="text">
+    <string>Текущая дата</string>
    </property>
   </action>
  </widget>
