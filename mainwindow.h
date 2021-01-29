@@ -37,6 +37,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    Ui::MainWindow* getTestUi()  //для тестов графического интерфейса
+    {
+        return ui;
+    }
+
 private slots:
     void on_actWhite_triggered();
 
