@@ -172,6 +172,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="255"/>
+        <location filename="mainwindow.cpp" line="297"/>
         <source>Печать</source>
         <translation>Print</translation>
     </message>
@@ -254,6 +255,11 @@
         <location filename="mainwindow.cpp" line="169"/>
         <source>Открыть документ</source>
         <translation>Open document</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="297"/>
+        <source>Нет открытых документов</source>
+        <translation>No documents are open</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="234"/>

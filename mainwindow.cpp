@@ -294,6 +294,7 @@ void MainWindow::on_actPrint_triggered()    //печать
     dlg.setWindowTitle("Печать");
     if(!ui->documentViewer->currentSubWindow())
     {
+        QMessageBox::information(0, tr("Печать"), tr("Нет открытых документов"));
         return;
     }
     if(dlg.exec() == QDialog::Accepted)
