@@ -2,6 +2,49 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>KeyFilter</name>
+    <message>
+        <location filename="keyfilter.cpp" line="69"/>
+        <location filename="keyfilter.cpp" line="73"/>
+        <location filename="keyfilter.cpp" line="85"/>
+        <location filename="keyfilter.cpp" line="89"/>
+        <location filename="keyfilter.cpp" line="101"/>
+        <location filename="keyfilter.cpp" line="105"/>
+        <location filename="keyfilter.cpp" line="117"/>
+        <location filename="keyfilter.cpp" line="121"/>
+        <source>Назначение клавиш</source>
+        <translation>Assigning keys</translation>
+    </message>
+    <message>
+        <location filename="keyfilter.cpp" line="69"/>
+        <source>Комбинация клавиш &quot;Создать&quot; изменена</source>
+        <translation>Keyboard shortcut \ &quot;Create\&quot; changed</translation>
+    </message>
+    <message>
+        <location filename="keyfilter.cpp" line="73"/>
+        <location filename="keyfilter.cpp" line="89"/>
+        <location filename="keyfilter.cpp" line="105"/>
+        <location filename="keyfilter.cpp" line="121"/>
+        <source>Изменение не удалось</source>
+        <translation>The change failed</translation>
+    </message>
+    <message>
+        <location filename="keyfilter.cpp" line="85"/>
+        <source>Комбинация клавиш &quot;Открыть&quot; изменена</source>
+        <translation>Keyboard shortcut \ &quot;Open\&quot; changed</translation>
+    </message>
+    <message>
+        <location filename="keyfilter.cpp" line="101"/>
+        <source>Комбинация клавиш &quot;Сохранить&quot; изменена</source>
+        <translation>Keyboard shortcut has been changed</translation>
+    </message>
+    <message>
+        <location filename="keyfilter.cpp" line="117"/>
+        <source>Комбинация клавиш &quot;Выход&quot; изменена</source>
+        <translation>Keyboard shortcut \ &quot;Exit\&quot; changed</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>Text Editor</source>
@@ -91,13 +134,13 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="159"/>
-        <location filename="mainwindow.cpp" line="213"/>
+        <location filename="mainwindow.cpp" line="236"/>
         <source>Сохранить как</source>
         <translation>Save as</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="164"/>
-        <location filename="mainwindow.cpp" line="87"/>
+        <location filename="mainwindow.cpp" line="104"/>
         <source>Справка</source>
         <translation>Help</translation>
     </message>
@@ -203,12 +246,12 @@
         <translation type="vanished">Assign key &quot;Quit&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="23"/>
+        <location filename="mainwindow.cpp" line="24"/>
         <source>Текстовый файл(*.txt)</source>
         <translation>Text file(*.txt)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="146"/>
+        <location filename="mainwindow.cpp" line="169"/>
         <source>Открыть документ</source>
         <translation>Open document</translation>
     </message>
@@ -223,9 +266,17 @@
         <translation>Dark</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="98"/>
+        <location filename="mainwindow.cpp" line="118"/>
         <source>Создать документ</source>
         <translation>Create document</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTextEditor</name>
+    <message>
+        <location filename="windowtexteditor.cpp" line="15"/>
+        <source>Сохранить изменения?</source>
+        <translation>To save changes?</translation>
     </message>
 </context>
 </TS>

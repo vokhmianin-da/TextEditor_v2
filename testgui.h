@@ -1,22 +1,22 @@
-#ifndef TESTGUI_H
-#define TESTGUI_H
+//#ifndef TESTGUI_H
+//#define TESTGUI_H
 
-#include <QObject>
+//#include <QObject>
 
-#include <QObject>
-#include <QtTest>
+//#include <QObject>
+//#include <QtTest>
 
-class TestGui : public QObject
-{
-    Q_OBJECT
-public:
-    explicit TestGui(QObject *parent = nullptr);
+//class TestGui : public QObject
+//{
+//    Q_OBJECT
+//public:
+//    explicit TestGui(QObject *parent = nullptr);
 
-signals:
+//signals:
 
-private slots:
-    void testGui();
+//private slots:
+//    void testGui();
 
-};
+//};
 
-#endif // TESTGUI_H
+//#endif // TESTGUI_H

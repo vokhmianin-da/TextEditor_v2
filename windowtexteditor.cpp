@@ -12,7 +12,7 @@ void WindowTextEditor::closeEvent(QCloseEvent *event)
     QString a = this->pDocument->toHtml();
     if(this->pDocument->getOldFileContent() != a)   //если были изменения файла
     {
-        QMessageBox mBox(QMessageBox::Information, "", "Сохранить изменения?", QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        QMessageBox mBox(QMessageBox::Information, "", tr("Сохранить изменения?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
         int n = mBox.exec();
         if(n == QMessageBox::Yes)   //сохранить изменения
         {
