@@ -1,4 +1,5 @@
 #include "keyfilter.h"
+#include <QMessageBox>
 
 
 KeyFilter::KeyFilter(QObject *parent) : QObject(parent)
@@ -12,6 +13,10 @@ bool KeyFilter::eventFilter(QObject *obj, QEvent *event)
     {
         MainWindow* ptrObj = static_cast<MainWindow*>(obj);
         QKeyEvent* ptrEvent = static_cast<QKeyEvent*>(event);
+        if(ptrEvent->key() == Qt::Key_Control || ptrEvent->key() == Qt::Key_Alt || ptrEvent->key() == Qt::Key_Shift)    //чтобы CNTRL, ALT, SHIFT использовались только как модификаторы
+        {
+            return false;
+        }
         //если не назначаем клавиши, то стандартная обработка события
         if(!ptrObj->ui->actExitAssign->isChecked() && !ptrObj->ui->actSaveAssign->isChecked() && !ptrObj->ui->actOpenAssign->isChecked() && !ptrObj->ui->actCreateAssign->isChecked())
         {
@@ -55,15 +60,18 @@ bool KeyFilter::checkKeys(unsigned int typeModifier, int key, MainWindow* ptr)
 
 bool KeyFilter::shortcutCreate(MainWindow *ptr, QKeyEvent *ptrEvent)    //назначаем "Создать"
 {
+
     if(checkKeys(ptrEvent->modifiers(), ptrEvent->key(), ptr))
     {
         ptr->createButton = ptrEvent->modifiers() + ptrEvent->key();
         ptr->ui->actCreateAssign->setChecked(false);    //сброс галочки назначения клавиши
         ptr->ui->actCreate->setShortcut(ptr->createButton);   //назначение новой комбинации
-        ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Создать\" изменена");
+        QMessageBox::information(0, "Назначение клавиш", "Комбинация клавиш \"Создать\" изменена");
+        //ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Создать\" изменена");
         return true;
     }
-    ptr->ptrStatusBar->showMessage("Изменение не удалось");
+    QMessageBox::information(0, "Назначение клавиш", "Изменение не удалось");
+    //ptr->ptrStatusBar->showMessage("Изменение не удалось");
     return true;
 }
 
@@ -74,10 +82,12 @@ bool KeyFilter::shortcutOpen(MainWindow *ptr, QKeyEvent *ptrEvent)  //назна
         ptr->openButton = ptrEvent->modifiers() + ptrEvent->key();
         ptr->ui->actOpenAssign->setChecked(false);    //сброс галочки назначения клавиши
         ptr->ui->actOpen->setShortcut(ptr->openButton);   //назначение новой комбинации
-        ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Открыть\" изменена");
+        QMessageBox::information(0, "Назначение клавиш", "Комбинация клавиш \"Открыть\" изменена");
+        //ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Открыть\" изменена");
         return true;
     }
-    ptr->ptrStatusBar->showMessage("Изменение не удалось");
+    QMessageBox::information(0, "Назначение клавиш", "Изменение не удалось");
+    //ptr->ptrStatusBar->showMessage("Изменение не удалось");
     return true;
 }
 
@@ -88,10 +98,12 @@ bool KeyFilter::shortcutSave(MainWindow *ptr, QKeyEvent *ptrEvent)  //назна
         ptr->saveButton = ptrEvent->modifiers() + ptrEvent->key();
         ptr->ui->actSaveAssign->setChecked(false);    //сброс галочки назначения клавиши
         ptr->ui->actSave->setShortcut(ptr->saveButton);   //назначение новой комбинации
-        ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Сохранить\" изменена");
+        QMessageBox::information(0, "Назначение клавиш", "Комбинация клавиш \"Сохранить\" изменена");
+        //ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Сохранить\" изменена");
         return true;
     }
-    ptr->ptrStatusBar->showMessage("Изменение не удалось");
+    QMessageBox::information(0, "Назначение клавиш", "Изменение не удалось");
+    //ptr->ptrStatusBar->showMessage("Изменение не удалось");
     return true;
 }
 
@@ -102,9 +114,11 @@ bool KeyFilter::shortcutExit(MainWindow *ptr, QKeyEvent *ptrEvent)  //назна
         ptr->quitButton = ptrEvent->modifiers() + ptrEvent->key();
         ptr->ui->actExitAssign->setChecked(false);    //сброс галочки назначения клавиши
         ptr->ui->actExit->setShortcut(ptr->quitButton);   //назначение новой комбинации
-        ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Выход\" изменена");
+        QMessageBox::information(0, "Назначение клавиш", "Комбинация клавиш \"Выход\" изменена");
+        //ptr->ptrStatusBar->showMessage("Комбинация клавиш \"Выход\" изменена");
         return true;
     }
-    ptr->ptrStatusBar->showMessage("Изменение не удалось");
+    QMessageBox::information(0, "Назначение клавиш", "Изменение не удалось");
+    //ptr->ptrStatusBar->showMessage("Изменение не удалось");
     return true;
 }
