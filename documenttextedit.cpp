@@ -19,3 +19,13 @@ QString documentTextEdit::getName()
 {
     return currentFileName;
 }
+
+void documentTextEdit::setOldFileContent(QString str)
+{
+    oldFileContent = str;
+}
+
+QString documentTextEdit::getOldFileContent()
+{
+    return oldFileContent;
+}

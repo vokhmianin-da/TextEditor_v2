@@ -34,7 +34,7 @@ private:
     QLabel* dataLbl;   //отображение даты
     QLabel* timeLbl;   //отображение времени
 
-    QString application = 0;    //хранит текущее имя файла
+    QString application = 0;    //хранит текущее имя файла стиля
 protected:
     virtual void timerEvent(QTimerEvent*);  //для отображения текущего времени
 

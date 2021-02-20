@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ptrStatusBar->addWidget(dataLbl);
     ptrStatusBar->addWidget(timeLbl);
-    this->startTimer(5000); //обновление текущих даты и времени каждые 5 сек
+    this->startTimer(1000); //обновление текущих даты и времени каждые 1 сек
 }
 
 
@@ -192,6 +192,7 @@ void MainWindow::on_actOpen_triggered() //открыть документ
                 //ui->plainTextEdit->setPlainText(stream.readAll());
                 ui->documentViewer->addSubWindow(tempWindow);    //добавление нового текстового окна в QMdiArea
                 pDocument->setHtml(stream.readAll());
+                pDocument->setOldFileContent(stream.readAll()); //запись содержимого для последующего сравнения при закрытии документа
                 file.close();
 
             }
@@ -240,6 +241,8 @@ void MainWindow::on_actSaveAs_triggered()   //сохранить как
                 ext = documentPtr->toHtml();
                 stream << ext;
                 file.close();
+                documentPtr->setName(currentFileName);  //установка нового имени файла в виджете
+                static_cast<QMainWindow*>(ui->documentViewer->currentSubWindow()->widget())->setWindowTitle(currentFileName);  //установка нового имени в заголовке окна
             }
         }
     }
