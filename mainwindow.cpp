@@ -11,6 +11,7 @@
 #include <QFontDialog>
 #include <QDate>
 #include <QTime>
+#include <windowtexteditor.h>
 
 
 
@@ -110,16 +111,17 @@ void MainWindow::on_actHelp_triggered() //вызов справки
 
 void MainWindow::on_actCreate_triggered()   //создание документа
 {
-    documentTextEdit* pDocument = new documentTextEdit; //создание нового текстового окна
-    pDocument->setName(QFileDialog::getSaveFileName(this, tr("Создать документ"), QDir::current().path(), filter));
+    WindowTextEditor* tempWindow = new WindowTextEditor;
+    connect (tempWindow, SIGNAL(saveDocument()), this, SLOT(on_actSave_triggered()));   //соединяем сигнал сохранения нового окна с слотом сохранения главного окна
 
-    QMainWindow* tempWindow = new QMainWindow;
-    tempWindow->setCentralWidget(pDocument);
-    tempWindow->setWindowTitle(pDocument->getName());   //установка имени вкладки
+    tempWindow->pDocument = new documentTextEdit; //создание нового текстового окна
+    tempWindow->pDocument->setName(QFileDialog::getSaveFileName(this, tr("Создать документ"), QDir::current().path(), filter));
+    tempWindow->setCentralWidget(tempWindow->pDocument);
+    tempWindow->setWindowTitle(tempWindow->pDocument->getName());   //установка имени вкладки
 
-    if (pDocument->getName().length() > 0)
+    if (tempWindow->pDocument->getName().length() > 0)
     {
-        QString ext = QString(&(pDocument->getName().data()[pDocument->getName().length() - 4]));
+        QString ext = QString(&(tempWindow->pDocument->getName().data()[tempWindow->pDocument->getName().length() - 4]));
         if (ext == ".txt")
         {
             QList <QMdiSubWindow*>tempList = ui->documentViewer->subWindowList();   //проверяем, открыт ли уже такой файл
@@ -135,13 +137,15 @@ void MainWindow::on_actCreate_triggered()   //создание документ�
                }
             }
 
-            QFile file(pDocument->getName());
+            QFile file(tempWindow->pDocument->getName());
             if (file.open(QFile::WriteOnly))
             {
                 QTextStream stream(&file);
                 stream.setCodec("UTF-8");    //ДЛЯ ОТОБРАЖЕНИЯ РУССКИХ БУКВ
                 ui->documentViewer->addSubWindow(tempWindow);    //добавление нового текстового окна в QMdiArea
-                stream << pDocument->toPlainText();
+                stream << tempWindow->pDocument->toPlainText();
+                tempWindow->pDocument->setOldFileContent(tempWindow->pDocument->toHtml()); //запись содержимого для последующего сравнения при закрытии документа
+                tempWindow->pDocument->setHtml(tempWindow->pDocument->getOldFileContent());
                 file.close();
             }
         }
@@ -149,26 +153,28 @@ void MainWindow::on_actCreate_triggered()   //создание документ�
 }
 
 void MainWindow::on_actOpen_triggered() //открыть документ
-{
-    documentTextEdit* pDocument = new documentTextEdit; //создание нового текстового окна
+{    
+    WindowTextEditor* tempWindow = new WindowTextEditor;
+    connect (tempWindow, SIGNAL(saveDocument()), this, SLOT(on_actSave_triggered()));   //соединяем сигнал сохранения нового окна с слотом сохранения главного окна
+
+    tempWindow->pDocument = new documentTextEdit; //создание нового текстового окна
     if(ui->actReadOnly->isChecked())
     {
-        pDocument->readOnlyMode = true; //только для чтения
+        tempWindow->pDocument->readOnlyMode = true; //только для чтения
     }
     else
     {
-        pDocument->readOnlyMode = false;
+        tempWindow->pDocument->readOnlyMode = false;
     }
-    pDocument->setName(QFileDialog::getOpenFileName(this, tr("Открыть документ"), QDir::current().path(), filter));
-    QMainWindow* tempWindow = new QMainWindow;
-    tempWindow->setCentralWidget(pDocument);
-    tempWindow->setWindowTitle(pDocument->getName());   //установка имени вкладки
+    tempWindow->pDocument->setName(QFileDialog::getOpenFileName(this, tr("Открыть документ"), QDir::current().path(), filter));
+    tempWindow->setCentralWidget(tempWindow->pDocument);
+    tempWindow->setWindowTitle(tempWindow->pDocument->getName());   //установка имени вкладки
 
-    if (pDocument->getName().length() > 0)
+    if (tempWindow->pDocument->getName().length() > 0)
     {
-        int index = pDocument->getName().indexOf(".txt");              // определяем, есть ли в
+        int index = tempWindow->pDocument->getName().indexOf(".txt");              // определяем, есть ли в
         // названии строка ".txt"
-        if (index != -1 && pDocument->getName().length() - 4 == index) // если это текстовый файл,
+        if (index != -1 && tempWindow->pDocument->getName().length() - 4 == index) // если это текстовый файл,
             // выполняются 2 условия:
             // строка ".txt" есть
             // в названии, и она
@@ -184,15 +190,15 @@ void MainWindow::on_actOpen_triggered() //открыть документ
                }
             }
 
-            QFile file(pDocument->getName());
+            QFile file(tempWindow->pDocument->getName());
             if (file.open(QFile::ReadOnly))
             {
                 QTextStream stream(&file);
                 stream.setCodec("UTF-8");    //ДЛЯ ОТОБРАЖЕНИЯ РУССКИХ БУКВ
                 //ui->plainTextEdit->setPlainText(stream.readAll());
                 ui->documentViewer->addSubWindow(tempWindow);    //добавление нового текстового окна в QMdiArea
-                pDocument->setHtml(stream.readAll());
-                pDocument->setOldFileContent(stream.readAll()); //запись содержимого для последующего сравнения при закрытии документа
+                tempWindow->pDocument->setOldFileContent(stream.readAll()); //запись содержимого для последующего сравнения при закрытии документа
+                tempWindow->pDocument->setHtml(tempWindow->pDocument->getOldFileContent());
                 file.close();
 
             }

@@ -17,12 +17,14 @@ SOURCES += main.cpp\
     keyfilter.cpp \
         mainwindow.cpp \
     documenttextedit.cpp \
-    testgui.cpp
+    testgui.cpp \
+    windowtexteditor.cpp
 
 HEADERS  += mainwindow.h \
     documenttextedit.h \
     keyfilter.h \
-    testgui.h
+    testgui.h \
+    windowtexteditor.h
 
 FORMS    += mainwindow.ui
 
