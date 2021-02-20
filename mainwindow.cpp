@@ -23,6 +23,22 @@ MainWindow::MainWindow(QWidget *parent) :
     filter = trUtf8("Текстовый файл(*.txt)");
     installEventFilter(new KeyFilter);
     ptrStatusBar = statusBar();
+    dataLbl = new QLabel;
+    timeLbl = new QLabel;
+
+    dataLbl->setText("Время: " + QTime::currentTime().toString("h:mm"));
+    timeLbl->setText("Дата: " +QDate::currentDate().toString("dd.MM.yyyy"));
+
+    ptrStatusBar->addWidget(dataLbl);
+    ptrStatusBar->addWidget(timeLbl);
+    this->startTimer(5000); //обновление текущих даты и времени каждые 5 сек
+}
+
+
+void MainWindow::timerEvent(QTimerEvent *)
+{
+    dataLbl->setText("Время: " + QTime::currentTime().toString("h:mm"));
+    timeLbl->setText("Дата: " +QDate::currentDate().toString("dd.MM.yyyy"));
 }
 
 MainWindow::~MainWindow()

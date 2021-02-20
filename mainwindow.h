@@ -31,7 +31,12 @@ private:
     QKeySequence saveButton = Qt::ControlModifier + Qt::Key_S;
     QKeySequence quitButton = Qt::ControlModifier + Qt::Key_Q;
 
+    QLabel* dataLbl;   //отображение даты
+    QLabel* timeLbl;   //отображение времени
+
     QString application = 0;    //хранит текущее имя файла
+protected:
+    virtual void timerEvent(QTimerEvent*);  //для отображения текущего времени
 
 public:
     explicit MainWindow(QWidget *parent = 0);
