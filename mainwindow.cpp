@@ -30,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     dataLbl->setText("Время: " + QTime::currentTime().toString("h:mm"));
     timeLbl->setText("Дата: " +QDate::currentDate().toString("dd.MM.yyyy"));
 
+    this->setMinimumSize(640, 480); //минимальный размер окна
+
     ptrStatusBar->addWidget(dataLbl);
     ptrStatusBar->addWidget(timeLbl);
     this->startTimer(1000); //обновление текущих даты и времени каждые 1 сек
