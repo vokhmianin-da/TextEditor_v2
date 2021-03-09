@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/new/res">
-        <file>help.txt</file>
+        <file>СПРАВКА.txt</file>
     </qresource>
     <qresource prefix="/new/translations">
         <file>QtLanguage_en.qm</file>

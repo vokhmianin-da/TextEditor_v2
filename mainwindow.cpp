@@ -91,7 +91,7 @@ void MainWindow::on_actRu_triggered()   //установить русский я
 
 void MainWindow::on_actHelp_triggered() //вызов справки
 {
-    QFile fileHelp(":/new/res/help.txt");
+    QFile fileHelp(":/new/res/СПРАВКА.txt");
     if (fileHelp.open(QFile::ReadOnly))
     {
         QTextStream stream(&fileHelp);
