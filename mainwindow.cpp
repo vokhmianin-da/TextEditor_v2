@@ -119,7 +119,8 @@ void MainWindow::on_actCreate_triggered()   //создание документ�
     tempWindow->pDocument = new documentTextEdit; //создание нового текстового окна
     tempWindow->pDocument->setName(QFileDialog::getSaveFileName(this, tr("Создать документ"), QDir::current().path(), filter));
     tempWindow->setCentralWidget(tempWindow->pDocument);
-    tempWindow->setWindowTitle(tempWindow->pDocument->getName());   //установка имени вкладки
+    tempWindow->setWindowTitle(tempWindow->pDocument->getName().section('/', -1));   //установка имени вкладки
+    tempWindow->setToolTip(tempWindow->pDocument->getName());   //полное имя как всплывающая подсказка
 
     if (tempWindow->pDocument->getName().length() > 0)
     {
@@ -129,7 +130,7 @@ void MainWindow::on_actCreate_triggered()   //создание документ�
             QList <QMdiSubWindow*>tempList = ui->documentViewer->subWindowList();   //проверяем, открыт ли уже такой файл
             for(int i = 0; i < tempList.size(); i++)
             {
-               if(tempList[i]->widget()->windowTitle() == tempWindow->windowTitle())
+               if(static_cast<WindowTextEditor*>(tempList[i]->widget())->pDocument->getName() == tempWindow->pDocument->getName())
                {
                    //Эта конструкция очищает окно, если такое уже было открыто (удивительно, но конструкция работает!!!)
                    documentTextEdit* ptr = static_cast<documentTextEdit*>(static_cast<QMainWindow*>(tempList[i]->widget())->centralWidget());
@@ -170,7 +171,8 @@ void MainWindow::on_actOpen_triggered() //открыть документ
     }
     tempWindow->pDocument->setName(QFileDialog::getOpenFileName(this, tr("Открыть документ"), QDir::current().path(), filter));
     tempWindow->setCentralWidget(tempWindow->pDocument);
-    tempWindow->setWindowTitle(tempWindow->pDocument->getName());   //установка имени вкладки
+    tempWindow->setWindowTitle(tempWindow->pDocument->getName().section('/', -1));   //установка имени вкладки
+    tempWindow->setToolTip(tempWindow->pDocument->getName());   //полное имя как всплывающая подсказка
 
     if (tempWindow->pDocument->getName().length() > 0)
     {
@@ -186,7 +188,7 @@ void MainWindow::on_actOpen_triggered() //открыть документ
             QList <QMdiSubWindow*>tempList = ui->documentViewer->subWindowList();   //проверяем, открыт ли уже такой файл
             for(int i = 0; i < tempList.size(); i++)
             {
-               if(tempList[i]->widget()->windowTitle() == tempWindow->windowTitle())
+               if(static_cast<WindowTextEditor*>(tempList[i]->widget())->pDocument->getName() == tempWindow->pDocument->getName())
                {
                    return;
                }
